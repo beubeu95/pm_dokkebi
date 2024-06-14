@@ -1,0 +1,154 @@
+html, body {
+  height: 91%;
+}
+
+.main{
+  height: 100%;
+}
+
+
+.left_body{
+  width: 60%;
+  height: 100%;
+  border-radius: 10px;
+  background-color: #f7f5f2;
+  overflow-y: scroll;
+ 
+}
+
+.left_body::-webkit-scrollbar {
+  width: 10px;
+}
+.left_body::-webkit-scrollbar-thumb {
+  background: rgb(180, 180, 194);
+  border-radius: 10px;
+}
+.left_body::-webkit-scrollbar-track {
+  background: rgba(214, 218, 220, 0.1);
+}
+.right_body{
+  width: 38%;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  padding: 60px;
+  height: 100%;
+}
+
+.header_title h2 {
+  margin-top : 0;
+}
+
+.input-group {
+  width: 100%;
+}
+.input {
+  height: 30px;
+  width: 80%;
+}
+.btn {
+  height: 36px;
+  width: 16%;
+  background-color: white;
+  color: red;
+  border-radius: 5px;
+  border: 1px solid gray;
+}
+@media (max-width: 1200px) {
+  .chatBox {
+    max-height: 83%;
+  }
+  .userInput {
+      flex-direction: column;
+  }
+  .input {
+    width: 97%;
+  }
+  .btn {
+      margin-left: 0;
+      margin-top: 10px; /* 수직 간격 추가 */
+      width : 100%
+  }
+}
+
+.chatBox::-webkit-scrollbar {
+  width: 10px;
+}
+.chatBox::-webkit-scrollbar-thumb {
+  background: rgb(180, 180, 194);
+  border-radius: 10px;
+}
+.chatBox::-webkit-scrollbar-track {
+  background: rgba(20, 163, 220, 0.1);
+}
+
+
+.chatBox {
+  background-color:  rgba(196, 219, 255, 1);
+  height: 88%;
+  margin-bottom: 4%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+}
+.answer {
+  align-self: flex-start;
+  width: 55%;
+  padding: 20px;
+  background-color: rgb(247, 225, 198);
+  border-radius: 10px;
+}
+.userInput {
+  align-self: flex-end;
+  width: 55%;
+  padding: 20px;
+  background-color: rgb(169, 216, 231);
+  border-radius: 10px;
+}
+
+.logo_wrap{
+  width: 100px;
+  margin: 10px auto; 
+  position: relative;
+}
+
+.logo_text{
+  position: absolute;
+  top: 5%;
+  left: 40%;
+  width: 80%; */
+  font-size: 10px;
+  /* text-align: center; */
+}
+
+.test_btn{
+    text-decoration-line: none;
+    width: 100px;
+    font-size: 10px;
+    border-radius : 20px;
+    background-color: rgb(48, 38, 193);
+    color: white;
+    margin: auto;
+    display: block;
+    text-align: center;
+  }
+
+  .calendar img{
+    width: 300px;
+    margin: auto;
+    display: block;
+    margin-bottom: 7%;
+  }
+
+  .logo-text{
+    font-family: "Jua", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+

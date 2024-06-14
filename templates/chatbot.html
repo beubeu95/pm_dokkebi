@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+
+
+    <title>chatbot</title>
+  
+</head>
+<body>
+<div class='main' id=''>
+        <div class='flex split' id=''>
+          <!-- 왼쪽 상태바 start -->
+          <div class='left_body' id='left_body'> 
+            컴퓨터의 중앙처리장치인 CPU는 데이터를 처리하기 위해 주기억장치와 끊임없이 데이터를 주고받는다. 그런데 CPU는 처리 속도가 매우 빠른 반면, 주기억장치의 처리 속도는 상대적으로 느리다. 그렇기 때문에 CPU가 명령을 실행할 때마다 주기억장치로부터 데이터를 읽어 오면 두 장치의 처리 속도의 차이로 인해 명령을 빠르게 실행할 수가 없다. 그래서 캐시 기억장치를 활용하여 데이터 처리 속도를 향상시킨다. 캐시 기억장치는 CPU 내에 또는 CPU와 주기억장치 사이에 위치한 기억장치로 주기억장치보다 용량은 작지만 처리 속도가 매우 빠르다. 이러한 캐시 기억장치에 주기억장치의 데이터 중 자주 사용되는 데이터의 일부를 복사해 두고 CPU가 이 데이터를 사용하도록 하는 과정을 ‘캐싱(caching)’이라고 한다. 
+
+            캐싱이 효율적으로 이루어지려면 CPU가 캐시 기억장치에 저장된 데이터를 반복적으로 사용하는 것이 중요한데 이를 위해 고려되는 것이 참조의 지역성이다. 참조의 지역성은 시간적 지역성과 공간적 지역성으로 나눌 수 있다. 시간적 지역성은 CPU가 한 번 사용한 특정 데이터가 가까운 미래에 다시 사용될 가능성이 높은 것을 말하고, 공간적 지역성은 한 번 사용한 데이터 근처에 있는 데이터가 곧 사용될 가능성이 높은 것을 말한다. 
+           
+            한편 주기억장치는 ‘워드(word)’ 단위로 데이터가 저장되고 캐시 기억장치는 ‘블록(block)’ 단위로 데이터가 저장된다. 이때 워드는 비트(bit)*의 집합이고 블록은 연속된 워드 여러 개의 묶음을 말한다. 주기억장치의 데이터가 캐시 기억장치에 저장되는 장소를 ‘라인(line)’이라고 한다. 캐시 기억장치는 일반적으로 하나의 라인에 하나의 블록이 들어갈 수 있도록 설계되어 있기 때문에 주기억장치에서 캐시 기억장치로 데이터를 전송할 때에는 블록 단위로 데이터를 전송한다. 캐시 기억장치 의 용량은 주기억장치보다 훨씬 작기 때문에 주기억장치의 블록 중에서 일부만 캐시 기억장치에 저장될 수 있다. 그러므로 캐싱을 위해서는 주기억장치의 여러 블록이 캐시 기억장치의 하나의 라인을 공유하여 사용해야 한다. 
+           
+            예를 들어 어떤 컴퓨터의 주기억장치의 데이터 용량을 워드 2n개, 캐시 기억장치의 데이터 용량을 워드 M개라고 가정해 보자. 이때 주기억장치의 블록 한 개가 K개의 워드로 이루어져 있다고 하면 이 주기억장치의 총 블록 개수는 2n/K개가 되며 각 워드는 n비트의 주소로 지정된다. 그리고 캐시 기억장치의 각 라인은 K개의 워드로 채워지므로 캐시 기억장치에는 총 M/K개의 라인이 만들어진다. 
+           
+            캐싱이 이루어질 때 CPU가 요청한 데이터가 캐시 기억장치 에 있는지 여부를 확인하고 해당 데이터를 불러오기 위해 주기억장치의 데이터 주소가 사용된다. 이 주소는 ‘태그 필드, 라인 필드, 워드 필드’의 형식으로 구성되어 있는데 ‘태그 필드’는 캐시 기억장치의 특정 라인에 주기억장치의 어떤 블록이 저장 되어 있는지를 구분해 주는 역할을 한다. 그리고 ‘라인 필드’는 주기억장치의 블록이 들어갈 캐시 기억장치의 라인을 지정해주며, ‘워드 필드’는 주기억장치의 각 블록에 저장되어 있는 워드를 지정해 준다. 
+           
+            주기억장치의 데이터를 캐시 기억장치에 저장하는 방식에는 여러 가지가 있는데 그중 하나가 ‘직접 매핑’이다. 직접 매핑은 주기억장치의 데이터를 블록 단위로 캐시 기억장치의 지정된 라인에 저장하는 방식이다. 직접 매핑 방식에서 캐싱이 이루어지는 과정은 다음과 같다. CPU가 ‘태그 필드, 라인 필드, 워드 필드’로 이루어진 주소를 통해 데이터를 요청하면, 우선 요청 주소의 라인 필드를 이용하여 캐시 기억장치의 해당 라인을 확인한다. 그리고 해당 라인에 데이터가 저장되어 있으면 그 라인의 태그와 요청 주소의 태그를 비교한다. 이때 두 태그의 값이 일치하는 경우를 ‘캐시 히트(cache hit)’라고 하며, 캐시 히트가 일어나면 주소의 워드 필드를 이용하여 라인 내 워드들 중에서 해당 데이터를 찾아 CPU에 보내 준다. 그런데 CPU가 요청한 주소의 태그와 캐시 기억장치 라인의 태그가 일치하지 않거나 해당 라인이 비어 있어서 요청한 데이터를 찾지 못하는 경우가 있다. 이는 CPU가 요청한 데이터가 캐시 기억장치에 저장되어 있지 않다는 의미로, 이 경우를 ‘캐시 미스(cache miss)’라고 한다. 캐시 미스가 일어나면 요청 주소에 해당하는 블록을 주기억장치에서 복사하여 캐시 기억장치의 지정된 라인에 저장한다. 그리고 주소의 태그를 그 라인의 태그 필드에 기록하고 요청된 데이터를 CPU에 보내 준다. 만약 그 라인에 다른 블록이 저장되어 있다면 그 블록은 지워지고 새롭게 가져온 블록이 저장된다. 
+           
+            직접 매핑은 CPU가 요청한 데이터가 캐시 기억장치에 있는지 확인할 때 해당 라인만 검색하면 되기 때문에 검색 속도가 빠르다. 그리고 회로의 구조가 단순하여 시스템을 구성하는 비용이 저렴한 장점이 있다. 하지만 같은 라인에 저장되어야 하는 서로 다른 블록을 CPU가 번갈아 요청하는 경우, 계속 캐시 미스가 발생해서 반복적으로 블록이 교체되므로 시스템의 효율이 떨어질 수 있다. 그래서 캐시 기억장치의 라인 어디에나 자유롭게 블록을 저장하는 ‘완전 연관 매핑’, 직접 매핑과 완전 연관 매핑을 혼합한 ‘세트 연관 매핑’ 등을 활용하기도 한다. 
+           
+           * 비트: 컴퓨터에서 정보를 나타내는 가장 기본적인 단위. 2진수의 0 또는 1이 하나의 비트.
+
+
+
+            
+          </div>
+
+          <!-- 왼쪽 상태바 end -->
+          <!-- 오른쪽 상태바 -->
+          <div class='right_body ' id='right_body'>
+        <!-- header start -->
+            <div class='header' id=''>
+                <div class='header_title' id=''>
+                    <h2>Chat Dokhaebi</h2>
+                </div>
+            </div>
+
+        <!-- header end -->
+
+            <div class="chatBox" id="chatBox">
+                <!-- Chat messages will be appended here -->
+                <div class="answer">안녕! 오늘도 기분 좋은 도캐비야!
+                    지문을 읽고 주제문을 찾는 연습을 도와줄게.
+                    시작할 준비 되었니?</div>
+                <div class="userInput">응 준비 됐어!</div>   
+                <div class="answer">다음 지문 차분히 읽어볼까?</div>
+                <div class="answer">충분히 읽었으면 ‘완료’를 입력해줘!</div>
+                <div class="userInput">완료</div>
+                <div class="answer">잘했어! 이제 지문에서 주제문을 찾아볼까? 주제문이라고 생각하는 문장을 입력해줘!</div>
+                <div class="userInput">생각한 문장 입력</div>
+                <div class="answer"> 주제문이라고 생각한 근거가 된 문장을 입력해 줄래?</div>
+                <div class="userInput">생각한 근거문장 입력</div>
+                <div class="answer">잘했어! 맞아 생각한 대로 이 글의 주제문을 뒷받침 하는 내용들은 ~~~야. </div>
+                <div class="answer">계속 연습을 원하면 ‘다음’을 그만하고 싶다면 ‘그만’을 입력해줘!</div>
+                <div class="userInput">그만</div>
+                <div class="answer">이번 시간도 고생했어.점점 실력이 좋아지고 있어!연습하고 싶다면 언제든 찾아와줘! 안녕~</div>
+            </div>
+               
+            <div class='' id=''>
+               
+                <div class="input-group" id="userInput">
+                    <input type="text" class="input" id="message" placeholder="Please message...">
+                    <button onclick="sendMessage()" id="sendBtn" class="btn"><i class="fas fa-paper-plane" style="color: black;"></i></i></button>
+                </div>
+            </div>
+
+        </div>
+          <!-- 오른쪽 상태바 end -->
+          <script src="https://unpkg.com/split.js@1.6.0/dist/split.min.js"></script>
+          <script>
+            // Split.js 초기화
+            Split(['#left_body', '#right_body'], {
+              sizes: [65, 35], // 초기 패널 사이즈 설정 (50%씩)
+              minSize: [20, 400], // 패널의 최소 크기 설정
+              gutterSize: 5 // 패널 사이의 거터 크기 설정
+            });
+          </script>
+          <script>
+            const messageInput = document.getElementById("message");
+            const chatBox = document.getElementById('chatBox');
+            const sendBtn = document.getElementById("sendBtn");
+            let xhr;
+    
+            messageInput.addEventListener("keyup", (e) => {
+                if (e.keyCode === 13) {
+                    sendMessage();
+                }
+            });
+            
+            function sendMessage() {
+              console.log(sendBtn.innerHTML)
+                if (sendBtn.innerHTML === '<i class="far fa-window-close"></i>') {
+                    xhr.abort();
+                }
+    
+                let message = messageInput.value;
+                if (!message.trim()) return;
+    
+                // Display user message
+                var userMessage = document.createElement('div');
+                userMessage.classList.add("userInput");
+                userMessage.textContent = '사용자: ' + message;
+                chatBox.appendChild(userMessage);
+    
+                // 스크롤바 하단으로 이동
+                chatBox.scrollTop = chatBox.scrollHeight;
+    
+                // Clear the input field
+                messageInput.value = '';
+    
+                // Send message to server
+                xhr = new XMLHttpRequest();
+                
+                xhr.onreadystatechange = function () {
+                    if(xhr.readyState === XMLHttpRequest.OPENED) {
+                        console.log("답변 가져오기를 기다리는 중");
+                        messageInput.disabled = true;
+                        // sendBtn.disabled = true;
+                        messageInput.value = "답변 가져오는 중...";
+                        sendBtn.innerHTML = '<i class="far fa-window-close"></i>';
+                    }
+    
+                    if(xhr.readyState === XMLHttpRequest.DONE) {
+                        console.log("요청 종료됨");
+                        messageInput.disabled = false;
+                        sendBtn.disabled = false;
+                        messageInput.value = "";
+                        sendBtn.innerHTML = "<i class='fas fa-arrow-right'></i>"
+                        if (xhr.status === 200) {
+                            // Display chatbot response
+                            console.log("정상적으로 답변 가져옴");
+                            var response = JSON.parse(xhr.responseText);
+                            var botMessage = document.createElement('div');
+                            botMessage.classList.add("answer")
+                            botMessage.textContent = 'Genia: ' + response.message;
+                            chatBox.appendChild(botMessage);
+    
+                            // Scroll to the bottom of the chat box
+                            chatBox.scrollTop = chatBox.scrollHeight;
+                        } else if (xhr.status === 0) {
+                            console.log("답변 가져오기 중지함");
+                            messageInput.disabled = false;
+                            messageInput.value = "";
+                            sendBtn.innerHTML = "<i class='fas fa-arrow-right'></i>";
+                            chatBox.scrollTop = chatBox.scrollHeight;
+                        } else {
+                            alert('Error: ' + xhr.status);
+                            chatBox.scrollTop = chatBox.scrollHeight;                        
+                        }
+                    }
+                };
+                xhr.open('POST', '/chat', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({ message: message }));
+            }
+        </script>
+    </div>
+</div>    
+
+</body>
+</html>
