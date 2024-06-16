@@ -36,12 +36,12 @@
             <div class='' id=''>
                 <div class="input-group" id="userInput">
                     <input type="text" class="input" id="message" placeholder="Please message...">
-                    <button onclick="sendMessage()" id="sendBtn" class="btn"><i class="fas fa-paper-plane" ></i></button>
+                    <button id="sendBtn" class="btn"><i class="fas fa-paper-plane" ></i></button>
                 </div>
     
                 <div class="input-group" id="userInput2" style="display: none;">
                     <input type="text" class="input" id="message2" placeholder="Please message...">
-                    <button onclick="sendEvidence()" id="sendBtn2" class="btn" ><i class="fas fa-paper-plane" ></i></button>
+                    <button id="sendBtn2" class="btn"><i class="fas fa-paper-plane" ></i></button>
                 </div>
             </div>
 
@@ -103,6 +103,9 @@
                         sendEvidence();
                     }
                 });
+
+                sendBtn.addEventListener('click', sendMessage);
+                sendEvid.addEventListener('click', sendEvidence);
     
                 function sendMessage() {
                     console.log("답안: "+answerBox);

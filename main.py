@@ -127,20 +127,33 @@ def feedback():
     print('지문 주제: ' + target_title)
     print('학생이 생각한 주제: ' + user_input)
 
-    # 오답인 경우, 제시한 근거로 그것의 논리성 해설
-    initial_content = (
-        f'너는 선생님이야. 학생이 지문을 읽고 핵심주제와 논리적 근거를 다음과 같이 생각했어. '
-        f'정답과 비교하여 이것이 오답인 이유를 설명해줘.\n'
-        f'지문: {target_article}\n'
-        f'정답: {target_title}\n'
-        f'학생이 생각한 핵심주제: {user_input}\n'
-        f'논리적 근거: {evidence}'
-    )
-    full_prompt = initial_content
+    # CountVectorizer 객체 생성
+    vectorizer = CountVectorizer()
 
-    session_state['messages'].append(("User", user_input))
-    response = get_response(full_prompt, target_article)
-    session_state['messages'].append(("GPT", response))
+    # 문장들을 벡터화
+    vectors = vectorizer.fit_transform([evidence, target_title])
+
+    # 코사인 유사도 계산
+    cosine_sim = cosine_similarity(vectors[0], vectors[1])
+
+    if cosine_sim[0][0] > 0.8:
+        # 정답인 경우
+        response = f"\n맞아. 핵심주제의 모범답안은 {target_title}이니 참고해줘!"
+    else : 
+        # 오답인 경우, 제시한 근거로 그것의 논리성 해설
+        initial_content = (
+            f'너는 선생님이야. 학생이 지문을 읽고 핵심주제와 논리적 근거를 다음과 같이 생각했어. '
+            f'정답과 비교하여 이것이 오답인 이유를 선생님이 학생에게 알려주듯이 친절하게 그리고 반말로 설명해줘.\n'
+            f'지문: {target_article}\n'
+            f'정답: {target_title}\n'
+            f'학생이 생각한 핵심주제: {user_input}\n'
+            f'논리적 근거: {evidence}'
+        )
+        full_prompt = initial_content
+        session_state['messages'].append(("User", user_input))
+        response = get_response(full_prompt, target_article)
+        session_state['messages'].append(("GPT", response))
+        
     print(response)
 
     # 결과 JSON 응답 생성
