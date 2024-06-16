@@ -59,7 +59,7 @@ data.head()
 def get_article():
 
     # 데이터 필터링 및 샘플 추출
-    target = data.loc[(data['지문 분야'] == "인문") & (data['isSelected'] != 1), :].sample(n=1)
+    target = data.loc[(data['isSelected'] != 1), :].sample(n=1)
     targetIndex = target.index
     data.loc[targetIndex, 'isSelected'] = 1
 
